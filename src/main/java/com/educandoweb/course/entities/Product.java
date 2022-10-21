@@ -19,7 +19,10 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+    joinColumns = @JoinColumn(name = "product_id"), //Quando usar join ele ja pega o seu id independent do name
+    inverseJoinColumns = @JoinColumn(name = "category_id")) //Aqui pega o id da associação
     private Set<Category> categories = new HashSet<>(); //Set porque não queremos produto com categorias repetidas.
 
     public Product(){
